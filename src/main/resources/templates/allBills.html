@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+        <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
+
+
+</head>
+<body>
+
+<center>
+    <h3>LISTA WPROWADZONYCH FAKTURY</h3>
+</center>
+
+<table>
+    <thead>
+    <tr>
+        <th> Numer</th>
+        <th> Kontrahent</th>
+        <th> Data</th>
+        <th> Pokaż szczegóły</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${bills.empty}">
+        <td colspan="2"> No Bills Available</td>
+    </tr>
+    <tr th:each="bill : ${bills}">
+        <td><span th:text="${bill.number}">  </span></td>
+        <td><span th:text="${bill.contractorName}">  </span></td>
+        <td><span th:text="${bill.date}"> </span></td>
+        <td><a th:href="@{'/' + ${bill.getId()} + '/bill'}">szczegóły</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+
+</html>
+
+

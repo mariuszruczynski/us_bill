@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
+</head>
+<body>
+<center>
+    <h3>FORMULARZ DODAWANIA NOWEJ FAKTURY</h3>
+</center>
+
+<form action="#" th:action="@{/create}" th:object="${positionForm}"
+      method="post">
+    <table>
+
+        <thead>
+        <tr>
+            <th> Kontrahent</th>
+            <th> Numer dokumentu</th>
+            <th> Data</th>
+            <th> Koszt dostawy w $</th>
+            <th> Wartość dolara</th>
+            <th> Wartość cła</th>
+        </tr>
+
+        </thead>
+        <tr th:each="bill : ${billForm}">
+            <td><input type="text" th:field="*{bill.contractorName}"/></td>
+            <td><input type="text" th:field="*{bill.number}"/></td>
+            <td><input type="date" th:field="*{bill.date}"/></td>
+            <td><input type="number" step="0.01" th:field="*{bill.shipingCost}"/></td>
+            <td><input type="number" step="0.0001" th:field="*{bill.dollarCost}"/></td>
+            <td><input type="number" step="0.01" th:field="*{bill.amountOfDuty}"/></td>
+            <th></th>
+        </tr>
+
+    </table>
+    <br>
+    <table>
+        <thead>
+        <tr>
+            <th> Nazwa towaru</th>
+            <th> Numer katalogowy</th>
+            <th> Ilość</th>
+            <th> Cena w $</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book, itemStat : *{billPositions}">
+            <td><input type="text" th:field="*{billPositions[__${itemStat.index}__].name}"/></td>
+            <td><input type="text" th:field="*{billPositions[__${itemStat.index}__].catalogNumber}"/></td>
+            <td><input type="number" th:field="*{billPositions[__${itemStat.index}__].amountOfStock}"/></td>
+            <td><input type="number" step="0.01" th:field="*{billPositions[__${itemStat.index}__].priceInDolars}"/></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <input type="submit" id="submitButton" th:value="Save">
+    <input type="reset" id="resetButton" name="reset" th:value="Reset"/>
+    <a href="/index">Main menu</a>
+</form>
+</body>
+
+</html>
+
+

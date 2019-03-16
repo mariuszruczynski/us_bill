@@ -6,10 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,12 +19,12 @@ import java.util.List;
 public class Bill {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String contractorName;
     private String number;
-    private LocalDate date;
-
-    //@OneToMany(mappedBy = "bill_position")
-    //List<BillPosition> billPositions;
-
+    private String date;
+    private BigDecimal shipingCost;
+    private BigDecimal amountOfDuty;
+    private Double dollarCost;
 }

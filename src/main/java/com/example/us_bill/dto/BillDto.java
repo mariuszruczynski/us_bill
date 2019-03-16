@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Setter
@@ -17,6 +18,8 @@ public class BillDto {
     private String contractorName;
     private String number;
     private LocalDate date;
-
+    private BigDecimal shipingCost;
+    private BigDecimal amountOfDuty;
+    private Double dollarCost;
 
 }

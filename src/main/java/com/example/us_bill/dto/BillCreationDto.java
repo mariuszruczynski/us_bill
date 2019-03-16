@@ -1,5 +1,6 @@
 package com.example.us_bill.dto;
 
+import com.example.us_bill.model.Bill;
 import com.example.us_bill.model.BillPosition;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 @Setter
 @Getter
-public class BillPositionListDto {
+public class BillCreationDto {
 
-    List<BillPosition> billPositions;
+    private List<BillPosition> billPositions;
+    private Bill bill;
 }

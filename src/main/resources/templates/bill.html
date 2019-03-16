@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
+
+</head>
+<body>
+
+<center>
+    <h3>SZCZEGÓŁY FAKTURY</h3>
+</center>
+
+<table>
+    <thead>
+    <tr>
+        <th> Kontrahent</th>
+        <th> Numer</th>
+        <th> Data</th>
+        <th> Wartość cła</th>
+        <th> Koszt wysyłki w $</th>
+        <th> Kurs dolara</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bill : ${bills}">
+        <td><span th:text="${bill.contractorName}">  </span></td>
+        <td><span th:text="${bill.number}">  </span></td>
+        <td><span th:text="${bill.date}">  </span></td>
+        <td><span th:text="${bill.amountOfDuty}">  </span></td>
+        <td><span th:text="${bill.shipingCost}">  </span></td>
+        <td><span th:text="${bill.dollarCost}">  </span></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<table>
+    <thead>
+    <tr>
+        <th> Nazwa Towaru:</th>
+        <th> Nr katalogowy</th>
+        <th> Ilość</th>
+        <th> Cena w $</th>
+        <th> Cena w zl</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${billPositions.empty}">
+        <td colspan="2"> No positions Available</td>
+    </tr>
+    <tr th:each="bill : ${billPositions}">
+        <td><span th:text="${bill.name}">  </span></td>
+        <td><span th:text="${bill.catalogNumber}">  </span></td>
+        <td><span th:text="${bill.amountOfStock}">  </span></td>
+        <td><span th:text="${bill.priceInDolars}">  </span></td>
+        <td><span th:text="${bill.priceInZl}">  </span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+
+</html>
