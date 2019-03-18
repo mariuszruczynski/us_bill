@@ -24,13 +24,14 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="bill : ${bills}">
-        <td><span th:text="${bill.contractorName}">  </span></td>
-        <td><span th:text="${bill.number}">  </span></td>
-        <td><span th:text="${bill.date}">  </span></td>
-        <td><span th:text="${bill.amountOfDuty}">  </span></td>
-        <td><span th:text="${bill.shipingCost}">  </span></td>
-        <td><span th:text="${bill.dollarCost}">  </span></td>
+    <tr>
+<!--    <tr th:each="bill : ${bills}">-->
+        <td><span th:text="${bills.contractorName}">  </span></td>
+        <td><span th:text="${bills.number}">  </span></td>
+        <td><span th:text="${bills.date}">  </span></td>
+        <td><span th:text="${bills.amountOfDuty}">  </span></td>
+        <td><span th:text="${bills.shipingCost}">  </span></td>
+        <td><span th:text="${bills.dollarCost}">  </span></td>
     </tr>
     </tbody>
 </table>
@@ -44,25 +45,34 @@
         <th> Ilość</th>
         <th> Cena w $</th>
         <th> Cena w zl</th>
+        <th> Suma w zl</th>
     </tr>
     </thead>
     <tbody>
     <tr th:if="${billPositions.empty}">
         <td colspan="2"> No positions Available</td>
     </tr>
-    <tr th:each="bill : ${billPositions}">
-        <td><span th:text="${bill.name}">  </span></td>
-        <td><span th:text="${bill.catalogNumber}">  </span></td>
-        <td><span th:text="${bill.amountOfStock}">  </span></td>
-        <td><span th:text="${bill.priceInDolars}">  </span></td>
-        <td><span th:text="${bill.priceInZl}">  </span></td>
+    <tr th:each="billpos : ${billPositions}">
+        <td><span th:text="${billpos.name}">  </span></td>
+        <td><span th:text="${billpos.catalogNumber}">  </span></td>
+        <td><span th:text="${billpos.amountOfStock}">  </span></td>
+        <td><span th:text="${billpos.priceInDolars}">  </span></td>
+        <td><span th:text="${billpos.priceInZl}">  </span></td>
+        <td><span th:text="${billpos.positionTotalCostInZl}">  </span></td>
     </tr>
     </tbody>
 </table>
 <br>
+<p style="text-align: center; font-size:120%;">
+Suma faktury netto w zł:
+<span  th:text="${bills.totalCostInZl}"></span>
+
+</p>
+<br>
 <br>
 <center>
-    <a href="/index">Main menu</a>
+    <a href="/allBills">Back</a>
+    <a href="/index">Menu</a>
 </center>
 </body>
 

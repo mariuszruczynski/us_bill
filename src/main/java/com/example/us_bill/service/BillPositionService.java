@@ -6,6 +6,7 @@ import com.example.us_bill.model.BillPosition;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static java.util.Objects.isNull;
@@ -40,13 +41,13 @@ public class BillPositionService {
     }
 
     private List<BillPosition> removeEmptyListElements(List<BillPosition> billPositions) {
-        List<BillPosition> billPositions1 = new ArrayList<>();
+        List<BillPosition> billPositionsAfterRemove = new ArrayList<>();
         for (BillPosition bp : billPositions) {
             if (!isNull(bp.getPriceInDolars()))
-                billPositions1.add(bp);
+                billPositionsAfterRemove.add(bp);
         }
-        return billPositions1;
+        Collections.reverse(billPositionsAfterRemove);
+        return billPositionsAfterRemove;
     }
-
 }
 
