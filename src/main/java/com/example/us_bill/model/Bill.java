@@ -27,4 +27,5 @@ public class Bill {
     private BigDecimal shipingCost;
     private BigDecimal amountOfDuty;
     private Double dollarCost;
+    private BigDecimal totalCostInZl;
 }

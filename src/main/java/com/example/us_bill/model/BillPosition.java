@@ -24,5 +24,6 @@ public class BillPosition {
     private BigDecimal priceInDolars;
     private BigDecimal priceInZl;
     private Long idBill;
+    private BigDecimal positionTotalCostInZl;
 
 }
