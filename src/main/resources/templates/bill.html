@@ -25,7 +25,6 @@
     </thead>
     <tbody>
     <tr>
-<!--    <tr th:each="bill : ${bills}">-->
         <td><span th:text="${bills.contractorName}">  </span></td>
         <td><span th:text="${bills.number}">  </span></td>
         <td><span th:text="${bills.date}">  </span></td>
@@ -73,6 +72,9 @@ Suma faktury netto w zł:
 <center>
     <a href="/allBills">Back</a>
     <a href="/index">Menu</a>
+    <td><a th:href="@{'/' + ${bills.getId()} + '/editBill'}">Edit</a></td>
+
+    <td><a onclick="return confirm('Are you sure?')" th:href="@{'/' + ${bills.getId()} + '/deleteBill'}" >Delete</a></td>
 </center>
 </body>
 

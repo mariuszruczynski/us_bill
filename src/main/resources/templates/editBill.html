@@ -8,10 +8,10 @@
 </head>
 <body>
 <center>
-    <h3>FORMULARZ DODAWANIA NOWEJ FAKTURY</h3>
+    <h3>FORMULARZ EDYCJI FAKTURY</h3>
 </center>
 
-<form action="#" th:action="@{/create}" th:object="${positionForm}"
+<form action="#" th:action="@{/editBill}" th:object="${positionForm}"
       method="post">
     <table>
 
@@ -26,11 +26,12 @@
         </tr>
 
         </thead>
-        <tr th:each="bill : ${billForm}">
+        <tr>
+            <td><input type="hidden" th:field="*{billDto.id}"/></td>
             <td><input required="required" type="text" th:field="*{billDto.contractorName}"/></td>
             <td><input required="required" type="text" th:field="*{billDto.number}"/></td>
             <td><input required="required" type="date" th:field="*{billDto.date}"/></td>
-            <td><input required="required" type="number" min="0" step="0.01" th:field="*{billDto.shipingCost}"/></td>
+            <td><input required="required" type="number" min="0 " step="0.01" th:field="*{billDto.shipingCost}"/></td>
             <td><input required="required" type="number" min="0" step="0.0001" th:field="*{billDto.dollarCost}"/></td>
             <td><input required="required" type="number" min="0" step="0.01" th:field="*{billDto.amountOfDuty}"/></td>
             <th></th>
@@ -49,10 +50,12 @@
         </thead>
         <tbody>
         <tr th:each="book, itemStat : *{billPositions}">
+            <td><input type="hidden" th:field="*{billPositions[__${itemStat.index}__].id}"/></td>
             <td><input type="text" th:field="*{billPositions[__${itemStat.index}__].name}"/></td>
             <td><input type="text" th:field="*{billPositions[__${itemStat.index}__].catalogNumber}"/></td>
             <td><input type="number" min="0" th:field="*{billPositions[__${itemStat.index}__].amountOfStock}"/></td>
-            <td><input type="number" min="0" step="0.01" th:field="*{billPositions[__${itemStat.index}__].priceInDolars}"/></td>
+            <td><input type="number" min="0" step="0.01"
+                       th:field="*{billPositions[__${itemStat.index}__].priceInDolars}"/></td>
         </tr>
         </tbody>
     </table>
@@ -63,6 +66,8 @@
         <br>
         <br>
         <a href="/index">Menu</a>
+        <a href="/allBills">Back</a>
+
     </center>
 </form>
 </body>

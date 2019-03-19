@@ -1,9 +1,11 @@
 package com.example.us_bill.service;
 
 import com.example.us_bill.Repository.BillPositionRepository;
+import com.example.us_bill.counter.BillCounter;
 import com.example.us_bill.model.Bill;
 import com.example.us_bill.model.BillPosition;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,12 +24,11 @@ public class BillPositionService {
         this.billCounter = billCounter;
     }
 
-    public List<BillPosition> findById(Long id) {
+    public List<BillPosition> findByBillId(Long id) {
         return billPositionRepository.findByBillId(id);
     }
 
     public void countAndSaveBill(List<BillPosition> positions, Bill bill) {
-
         List<BillPosition> billPositions = removeEmptyListElements(positions);
         setBillId(billPositions, bill.getId());
         billCounter.countBill(billPositions, bill);
@@ -43,11 +44,17 @@ public class BillPositionService {
     private List<BillPosition> removeEmptyListElements(List<BillPosition> billPositions) {
         List<BillPosition> billPositionsAfterRemove = new ArrayList<>();
         for (BillPosition bp : billPositions) {
-            if (!isNull(bp.getPriceInDolars()))
+            if (!isNull(bp.getPriceInDolars())
+            && !isNull(bp.getAmountOfStock()))
                 billPositionsAfterRemove.add(bp);
         }
         Collections.reverse(billPositionsAfterRemove);
         return billPositionsAfterRemove;
+    }
+
+    @Transactional
+    public void deleteByBillId(Long id) {
+        billPositionRepository.deleteByBillId(id);
     }
 }
 

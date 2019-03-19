@@ -12,4 +12,9 @@ public class MainController {
     public String index(Model model) {
         return "index";
     }
+
+    @RequestMapping(value = {"/emptyList"}, method = RequestMethod.GET)
+    public String emptyListError(Model model) {
+        return "emptyList";
+    }
 }

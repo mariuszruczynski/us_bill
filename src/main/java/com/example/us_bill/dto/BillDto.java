@@ -17,9 +17,10 @@ public class BillDto {
     private Long id;
     private String contractorName;
     private String number;
-    private LocalDate date;
+    private String date;
     private BigDecimal shipingCost;
     private BigDecimal amountOfDuty;
     private Double dollarCost;
+    private BigDecimal totalCostInZl;
 
 }

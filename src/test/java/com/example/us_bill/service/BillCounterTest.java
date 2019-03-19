@@ -1,5 +1,6 @@
 package com.example.us_bill.service;
 
+import com.example.us_bill.counter.BillCounter;
 import com.example.us_bill.model.Bill;
 import com.example.us_bill.model.BillPosition;
 import org.junit.jupiter.api.Test;
