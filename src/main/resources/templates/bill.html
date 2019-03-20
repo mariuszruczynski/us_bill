@@ -77,6 +77,8 @@
     <br>
     <br>
     <td><a onclick="return confirm('Are you sure?')" th:href="@{'/' + ${bills.getId()} + '/deleteBill'}">Delete</a></td>
+    <form th:action="@{/logout}" method="post">
+
 </center>
 </body>
 
