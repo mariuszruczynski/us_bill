@@ -10,9 +10,8 @@ import java.util.List;
 
 public interface BillPositionRepository extends JpaRepository<BillPosition, Long> {
 
-    @Query (value = "SELECT * FROM bill_position WHERE id_bill =:idBill", nativeQuery = true)
+    @Query (value = "SELECT a FROM BillPosition a WHERE idBill =:idBill")
     List<BillPosition> findByBillId(@Param("idBill") Long id);
-
 
     @Modifying
     @Query  (value = "DELETE FROM BillPosition where idBill=:idBill")

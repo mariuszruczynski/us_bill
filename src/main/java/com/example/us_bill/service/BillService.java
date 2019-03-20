@@ -63,4 +63,16 @@ public class BillService {
         billRepository.deleteById(id);
     }
 
+    public BillDto findDtoById(Long id) {
+        Bill bill = findById(id);
+        return new BillDto(
+                bill.getId(),
+                bill.getContractorName(),
+                bill.getNumber(),
+                bill.getDate(),
+                bill.getShipingCost(),
+                bill.getAmountOfDuty(),
+                bill.getDollarCost(),
+                bill.getTotalCostInZl());
+    }
 }

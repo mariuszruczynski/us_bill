@@ -63,8 +63,8 @@
 </table>
 <br>
 <p style="text-align: center; font-size:120%;">
-Suma faktury netto w zł:
-<span  th:text="${bills.totalCostInZl}"></span>
+    Suma faktury netto w zł:
+    <span th:text="${bills.totalCostInZl}"></span>
 
 </p>
 <br>
@@ -72,9 +72,11 @@ Suma faktury netto w zł:
 <center>
     <a href="/allBills">Back</a>
     <a href="/index">Menu</a>
-    <td><a th:href="@{'/' + ${bills.getId()} + '/editBill'}">Edit</a></td>
-
-    <td><a onclick="return confirm('Are you sure?')" th:href="@{'/' + ${bills.getId()} + '/deleteBill'}" >Delete</a></td>
+    <td><a onclick="return confirm('Are you sure?')" th:href="@{'/' + ${bills.getId()} + '/editBill'}">Edit</a></td>
+    <td><a onclick="return confirm('Are you sure?')" th:href="@{'/' + ${bills.getId()} + '/toPdf'}">To pdf</a></td>
+    <br>
+    <br>
+    <td><a onclick="return confirm('Are you sure?')" th:href="@{'/' + ${bills.getId()} + '/deleteBill'}">Delete</a></td>
 </center>
 </body>
 

@@ -1,4 +1,5 @@
 HELP.md
+/src/main/resources/application-ex.properties
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
@@ -16,7 +17,6 @@ HELP.md
 *.iws
 *.iml
 *.ipr
-/src/main/resources/application-ex.properties
 
 
 ### NetBeans ###

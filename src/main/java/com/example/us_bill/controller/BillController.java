@@ -6,10 +6,15 @@ import com.example.us_bill.model.Bill;
 import com.example.us_bill.model.BillPosition;
 import com.example.us_bill.service.BillPositionService;
 import com.example.us_bill.service.BillService;
+import com.example.us_bill.service.PdfService;
+import org.dom4j.DocumentException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +23,16 @@ public class BillController {
 
     private final BillService billService;
     private final BillPositionService billPositionService;
+    private final TimeStampFileNameGenerator timeStampFileNameGenerator;
+    private final PdfService pdfService;
 
-    public BillController(BillService billService, BillPositionService billPositionService) {
+
+
+    public BillController(BillService billService, BillPositionService billPositionService, TimeStampFileNameGenerator timeStampFileNameGenerator, PdfService pdfService) {
         this.billService = billService;
         this.billPositionService = billPositionService;
+        this.timeStampFileNameGenerator = timeStampFileNameGenerator;
+        this.pdfService = pdfService;
     }
 
     @GetMapping("allBills")
@@ -101,6 +112,23 @@ public class BillController {
         billService.deleteById(id);
         billPositionService.deleteByBillId(id);
         return "redirect:/allBills";
+    }
+
+    @GetMapping(value = {"/{id}/toPdf"}, produces = "application/pdf")
+    public @ResponseBody
+    void getByDateAndExportToPdf(@PathVariable Long id, Model model, HttpServletResponse response) throws IOException, DocumentException {
+
+        BillDto billDto = billService.findDtoById(id);
+        List<BillPosition> billPosition = billPositionService.findByBillId(id);
+        BillCreationDto billCreationDto = new BillCreationDto(billPosition, billDto);
+
+
+        byte[] pdfReport = pdfService.generatePdfReport(billCreationDto);
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "attachment; filename=" + timeStampFileNameGenerator.generateTimeStampFileName());
+        response.setHeader("Content-Length", String.valueOf(pdfReport.length));
+        FileCopyUtils.copy(pdfReport, response.getOutputStream());
+
     }
 
 }
